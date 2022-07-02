@@ -5,23 +5,42 @@
    * Follow https://github.com/FBOTZ-YT
 */
 
-require('../settings')
-const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+require('./settings')
+const { default: DarlynBotIncConnect, useSingleFileAuthState, DisconnectReason, fetchLatestBaileysVersion, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
+const { state, saveState } = useSingleFileAuthState(`./${sessionName}.json`)
 const pino = require('pino')
+const { Boom } = require('@hapi/boom')
 const fs = require('fs')
+const yargs = require('yargs/yargs')
 const chalk = require('chalk')
-const cfonts = require('cfonts')
-const axios = require('axios')
 const FileType = require('file-type')
+const path = require('path')
 const PhoneNumber = require('awesome-phonenumber')
-const lolcatjs = require('lolcatjs')
-const {Boom} = require("@hapi/boom")
-const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('../lib/exif')
-const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('../lib/myfunc')
-const { state, saveState } = useSingleFileAuthState(`./${global.sessionName}.json`)
-const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
+const { imageToWebp, videoToWebp, writeExifImg, writeExifVid } = require('./lib/exif')
+const { smsg, isUrl, generateMessageTag, getBuffer, getSizeMedia, fetchJson, await, sleep } = require('./lib/myfunc')
+
+var low
+try {
+  low = require('lowdb')
+} catch (e) {
+  low = require('./lib/lowdb')
+}
+
+const { Low, JSONFile } = low
+const mongoDB = require('./lib/mongoDB')
+const { Drakor } = require('xfarr-api')
+
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
+const store = makeInMemoryStore({ logger: pino().child({ level: 'silent', stream: 'store' }) })
+
+global.opts = new Object(yargs(process.argv.slice(2)).exitProcess(false).parse())
+global.db = new Low(
+  /https?:\/\//.test(opts['db'] || '') ?
+    new cloudDBAdapter(opts['db']) : /mongodb/.test(opts['db']) ?
+      new mongoDB(opts['db']) :
+      new JSONFile(`database/database.json`)
+)
 //Starting In Console
 async function startIchigo(){
   
@@ -91,32 +110,10 @@ console.log(err)
 //Connection Active
 ichi.ev.on('connection.update', async (update) => {
 	const {
-		connection,
-		lastDisconnect
+		connection
+   
 	} = update
 	try {
-		if (connection === 'close') {
-			let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-			if (reason === DisconnectReason.badSession) {
-				console.log(`Bad Session File, Please Delete Session and Scan Again`);
-			} else if (reason === DisconnectReason.connectionClosed) {
-				console.log("Connection closed, reconnecting....");
-				startIchigo();
-			} else if (reason === DisconnectReason.connectionLost) {
-				console.log("Connection Lost from Server, reconnecting...");
-				startIchigo();
-			} else if (reason === DisconnectReason.connectionReplaced) {
-				console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
-			} else if (reason === DisconnectReason.loggedOut) {
-				console.log(`Device Logged Out, Please Scan Again And Run.`);
-			} else if (reason === DisconnectReason.restartRequired) {
-				console.log("Restart Required, Restarting...");
-				startIchigo();
-			} else if (reason === DisconnectReason.timedOut) {
-				console.log("Connection TimedOut, Reconnecting...");
-				startIchigo();
-			} else ichi.end(`Unknown DisconnectReason: ${reason}|${connection}`)
-		}
 		if (update.connection == "connecting" || update.receivedPendingNotifications == "false") {
 			lolcatjs.fromString(`[Sedang mengkoneksikan]`)
 		}
