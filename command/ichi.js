@@ -73,10 +73,10 @@ const isGroup = key.remoteJid.endsWith('@g.us')
 const groupMetadata = isGroup ? await ichi.groupMetadata(chat).catch(e => {}) : ''
 const groupName = isGroup ? groupMetadata.subject : ''
 const participants = isGroup ? await groupMetadata.participants : ''
-const groupAdmins = isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
+const groupAdmins = isGroup ? await groupAdmins.filter(v => v.admin !== null).map(v => v.id) : ''
 const groupOwner = isGroup ? groupOwner.owner : ''
 const isBotAdmins = isGroup ? groupAdmins.includes(botNumber) : false
-const isAdmins = isGroup ? groupOwner.includes(sender) || groupOwner.includes(sender) : false
+const isAdmins = isGroup ? groupAdmins.includes(sender) || groupAdmins.includes(sender) : false
 const mentionUser = [...new Set([...(mentionedJid || []), ...(quoted ? [quoted.sender] : [])])]
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 
