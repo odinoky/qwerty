@@ -69,12 +69,11 @@ const { type, quotedMsg, mentioned, now, fromMe } = m
 const more = String.fromCharCode(8206)
 const readmore = more.repeat(4001)
 
-const isGroup = key.remoteJid.endsWith('@g.us')
 const groupMetadata = isGroup ? await ichi.groupMetadata(chat).catch(e => {}) : ''
 const groupName = isGroup ? groupMetadata.subject : ''
 const participants = isGroup ? await groupMetadata.participants : ''
-const groupAdmins = isGroup ? await groupAdmins.filter(v => v.admin !== null).map(v => v.id) : ''
-const groupOwner = isGroup ? groupOwner.owner : ''
+const groupAdmins = isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
+const groupOwner = isGroup ? groupOwner.includes(ownerNumber) : false
 const isBotAdmins = isGroup ? groupAdmins.includes(botNumber) : false
 const isAdmins = isGroup ? groupAdmins.includes(sender) || groupAdmins.includes(sender) : false
 const mentionUser = [...new Set([...(mentionedJid || []), ...(quoted ? [quoted.sender] : [])])]
