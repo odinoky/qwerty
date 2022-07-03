@@ -50,34 +50,34 @@ chats: {},
 module.exports = ichi = async(ichi, m, chatUpdate, store) => {
 try {
   //console.log(m)
-var body = (mtype === 'conversation') ? message.conversation : (mtype == 'imageMessage') ? message.imageMessage.caption : (mtype == 'videoMessage') ? message.videoMessage.caption : (mtype == 'extendedTextMessage') ? message.extendedTextMessage.text : (mtype == 'buttonsResponseMessage') ? message.buttonsResponseMessage.selectedButtonId : (mtype == 'listResponseMessage') ? message.listResponseMessage.singleSelectReply.selectedRowId : (mtype == 'templateButtonReplyMessage') ? message.templateButtonReplyMessage.selectedId : (mtype === 'messageContextInfo') ? (message.buttonsResponseMessage?.selectedButtonId || message.listResponseMessage?.singleSelectReply.selectedRowId || text) : ''
-var budy = (typeof text == 'string' ? text : '')
+var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+var budy = (typeof m.text == 'string' ? m.text : '')
 var prefix = prefa ? /^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi.test(body) ? body.match(/^[°•π÷×¶∆£¢€¥®™+✓_=|~!?@#$%^&.©^]/gi)[0] : "" : prefa ?? global.prefix
 const isCmd = body.startsWith(prefix)
 const command = body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase()
 const args = body.trim().split(/ +/).slice(1)
-const pushname = pushName || "No Name"
+const pushname = m.pushName || "No Name"
 const botNumber = ichi.user.id ? ichi.user.id.split(":")[0]+"@s.whatsapp.net" : ichi.user.id
-const isOwner = [ichi.user.id, ...global.ownerNumber].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(sender)
-const itsMe = sender == ichi.user.id ? true : false
+const isOwner = [ichi.user.id, ...global.ownerNumber].map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').includes(m.sender)
+const itsMe = m.sender == ichi.user.id ? true : false
 const text = q = args.join(" ")
-const quoted = quoted ? quoted : m
+const quoted = m.quoted ? m.quoted : m
 const mime = (quoted.msg || quoted).mimetype || ''
 const isMedia = /image|video|sticker|audio/.test(mime)
-const from = key.remoteJid
+const from = m.key.remoteJid
 const { type, quotedMsg, mentioned, now, fromMe } = m
 const more = String.fromCharCode(8206)
 const readmore = more.repeat(4001)
 
-const isGroup = key.remoteJid.endsWith('@g.us')
-const groupMetadata = isGroup ? await ichi.groupMetadata(chat).catch(e => {}) : ''
-const groupName = isGroup ? groupMetadata.subject : ''
-const participants = isGroup ? await groupMetadata.participants : ''
-const groupAdmins = isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
-const groupOwner = isGroup ? groupMetadata.owner : ''
-const isBotAdmins = isGroup ? groupAdmins.includes(botNumber) : false
-const isAdmins = isGroup ? groupAdmins.includes(sender) || groupAdmins.includes(sender) : false
-const mentionUser = [...new Set([...(mentionedJid || []), ...(quoted ? [quoted.sender] : [])])]
+const isGroup = m.key.remoteJid.endsWith('@g.us')
+const groupMetadata = m.isGroup ? await ichi.groupMetadata(m.chat).catch(e => {}) : ''
+const groupName = m.isGroup ? groupMetadata.subject : ''
+const participants = m.isGroup ? await groupMetadata.participants : ''
+const groupAdmins = m.isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
+const groupOwner = m.isGroup ? groupMetadata.owner : ''
+const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
+const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) || groupAdmins.includes(m.sender) : false
+const mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 
 
