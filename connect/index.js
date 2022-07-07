@@ -50,6 +50,16 @@ auth: state
 
 store.bind(ichi.ev)
 
+ichi.ws.on('CB:call', async (json) => {
+const callerId = json.content[0].attrs['call-creator']
+if (json.content[0].tag == 'offer') {
+let pa7rick = await ichi.sendMessage(jid, global.owner)
+ichi.sendMessage(jid, { text: `Automatic block system!\nDon't call bot!\nPlease contact the owner to open !`}, { quoted : pa7rick })
+ichi.sendMessage(jid, {text: `*Report Bot:* Someone Called Bot`})
+await sleep(8000)
+await ichi.updateBlockStatus(callerId, "block")
+}
+})
 //Connect To Command
 ichi.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
