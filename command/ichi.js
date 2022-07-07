@@ -76,7 +76,7 @@ const participants = m.isGroup ? await groupMetadata.participants : ''
 const groupAdmins = m.isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
 const groupOwner = m.isGroup ? groupMetadata.owner : ''
 const isBotAdmins = m.isGroup ? groupAdmins.includes(botNumber) : false
-const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) || groupAdmins.includes(m.sender) : false
+const isAdmins = m.isGroup ? groupAdmins.includes(m.sender) || groupAdmins.includes(m.sender) : ''
 const mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 
@@ -122,7 +122,7 @@ ichi.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
     
     💫 *MessageType* : ${m.mtype}`
      reply(teks)
-			await sleep(500)
+			await sleep(50000000000)
 			m.copyNForward(m.chat, true, {
 				readViewOnce: true
 			}, {
@@ -203,7 +203,7 @@ case 'bcgc': case 'bcgroup': {
   let anu = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let i of anu) {
-  await sleep(1500)
+  await sleep(50000000000)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}\n`
   ichi.sendButtonText(i, txt, m)
   }
@@ -219,7 +219,7 @@ case 'bc': case 'broadcast': case 'bcall': {
   let anuan = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let yoi of anu && anuan) {
-  await sleep(1500)
+  await sleep(50000000000)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}`
   ichi.sendText(yoi, txt, m)
   }
