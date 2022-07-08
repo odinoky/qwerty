@@ -559,7 +559,3 @@ console.log(chalk.redBright(`Update ${__filename}`))
 delete require.cache[file]
 require(file)
 })
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
