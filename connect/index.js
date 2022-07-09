@@ -117,7 +117,7 @@ ichi.ev.on('connection.update', async (update) => {
 				startIchigo();
 			} else ichi.end(`Unknown DisconnectReason: ${reason}|${connection}`)
 		}
-		if (update.connection == "connecting" || update.receivedPendingNotifications == "false") {
+		if (update.connection == "connecting" || update.receivedPendingNotifications == "true") {
 			lolcatjs.fromString(`[Sedang mengkoneksikan]`)
 		}
 		if (update.connection == "open" || update.receivedPendingNotifications == "true") {
