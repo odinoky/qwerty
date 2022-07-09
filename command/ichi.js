@@ -203,7 +203,7 @@ case 'bcgc': case 'bcgroup': {
   let anu = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let i of anu) {
-  await sleep(50000000000)
+  await sleep(``)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}\n`
   ichi.sendButtonText(i, txt, m)
   }
@@ -219,7 +219,7 @@ case 'bc': case 'broadcast': case 'bcall': {
   let anuan = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let yoi of anu && anuan) {
-  await sleep(50000000000)
+  await sleep(``)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}`
   ichi.sendText(yoi, txt, m)
   }
