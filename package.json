@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "WhatsApp Using Lib Baileys Multi Device",
   "main": "connect/index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "start": "node index.js",
+    "start": "node connect/index.js",
     "dev": "nodemon app.js"
   },
   "nodemonConfig": {
