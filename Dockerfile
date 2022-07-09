@@ -7,6 +7,7 @@ RUN apt-get update && \
   wget \
   yarn \
   webp \
+  sleep \
   imagemagick && \
   rm -rf /var/lib/apt/lists/*
 
@@ -17,6 +18,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN yarn
 RUN pwd
 RUN ls
+RUN slepp
 
 COPY . .
 
