@@ -81,10 +81,6 @@ const mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.qu
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 
 
-const sleep = async (m) => {
-  return new Promise(resolve => setTimeout(resolve, m))
-}
-
 const reply = (texto) => {
 			ichi.sendMessage(m.chat, { text: texto, mentions: [m.sender] }, {	quoted: m })
 		}
@@ -192,6 +188,9 @@ case 'менюшка': {
 ╠ ${prefix}removebg
 ╚════════
   `
+  let but = [
+  ]
+  ichi.sendButtonImg(m.chat, menu, global.ownerName, global.thumb, but)
   }
   break
 

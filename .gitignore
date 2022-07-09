@@ -1,5 +1,4 @@
 node_modules
-package-inlock.json
-yarn.inlock
-sleep.json
+package-lock.json
+yarn.lock
 sesi.json

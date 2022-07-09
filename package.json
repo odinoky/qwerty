@@ -1,6 +1,6 @@
 {
   "name": "qwerty",
-  "version": "1.0.0",
+  "version": "10.8.9",
   "description": "WhatsApp Using Lib Baileys Multi Device",
   "main": "index.js",
   "type": "commonjs",
@@ -78,5 +78,5 @@
   "bugs": {
     "url": "https://github.com/odinoky/qwerty/issues"
   },
-  "homepage": "https://github.com/odinoky/qwerty3#readme"
+  "homepage": "https://github.com/odinoky/qwerty#readme"
 }
