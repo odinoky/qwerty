@@ -1,4 +1,4 @@
- /**
+/**
    * Made By Fandyyy 🕴️
    * Subscribe FBOTZ YT
    * Follow https://instagram.com/_nzrlafndi
@@ -25,7 +25,7 @@ global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.
 //Starting In Console
 async function startIchigo(){
   
-cfonts.say('ICHIGO',{
+cfonts.say('OLYA3',{
 font: 'block',
 gradient: ['red','magenta'],
 align: 'center'
@@ -73,10 +73,10 @@ for (let num of participants) {
 try {
 ppuser = await ichi.profilePictureUrl(num, 'image') 
 } catch {
-ppuser = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
+ppuser = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
 }
 if (anu.action == 'add') {
-tekswell = `Welcome @${num.split('@')[0]} To ${metadata.subject} 👋`
+tekswell = `Welcome  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Name*: @${num.split('@')[0]}\n⤔ *Bio*:\n*――――――――――――――*\n\nWelcome 🎊🎊🎉!`
 ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: tekswell })
 } else if (anu.action == 'remove') {
 teksbye = `Sayonaraa @${num.split("@")[0]} 👋`

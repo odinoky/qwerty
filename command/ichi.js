@@ -122,7 +122,7 @@ ichi.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
     
     💫 *MessageType* : ${m.mtype}`
      reply(teks)
-			await sleep(``)
+			await sleep(500)
 			m.copyNForward(m.chat, true, {
 				readViewOnce: true
 			}, {
@@ -203,7 +203,7 @@ case 'bcgc': case 'bcgroup': {
   let anu = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let i of anu) {
-  await sleep(``)
+  await sleep(1500)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}\n`
   ichi.sendButtonText(i, txt, m)
   }
@@ -219,7 +219,7 @@ case 'bc': case 'broadcast': case 'bcall': {
   let anuan = groups.map(v => v.id)
   m.reply(mess.wait + '\nMohon Untuk Menunggu Sejenak')
   for (let yoi of anu && anuan) {
-  await sleep(``)
+  await sleep(1500)
   let txt = `*Broadcast ${ichi.user.name}*\n\n${text}`
   ichi.sendText(yoi, txt, m)
   }
