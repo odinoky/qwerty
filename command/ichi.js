@@ -122,7 +122,7 @@ ichi.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
     
     💫 *MessageType* : ${m.mtype}`
      reply(teks)
-			await sleep(` `)
+			await sleep(``)
 			m.copyNForward(m.chat, true, {
 				readViewOnce: true
 			}, {
