@@ -91,14 +91,12 @@ console.log(err)
 //Connection Active
 ichi.ev.on('connection.update', async (update) => {
 	const {
-		connection,
-		lastDisconnect
+		connection
 	} = update
 	try {
 		if (connection === 'close') {
 			let reason = new Boom(lastDisconnect?.error)?.output.statusCode
 			if (reason === DisconnectReason.badSession) {
-				console.log(`Bad Session File, Please Delete Session and Scan Again`);
 			} else if (reason === DisconnectReason.connectionClosed) {
 				console.log("Connection closed, reconnecting....");
 				startIchigo();
