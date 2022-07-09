@@ -6,7 +6,7 @@ RUN apt-get update && \
   ffmpeg \
   wget \
   yarn \
-  webp \
+  sleep \
   imagemagick && \
   rm -rf /var/lib/apt/lists/*
 
