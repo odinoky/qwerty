@@ -1,4 +1,4 @@
-/**
+ /**
    * Made By Fandyyy 🕴️
    * Subscribe FBOTZ YT
    * Follow https://instagram.com/_nzrlafndi
@@ -9,7 +9,6 @@ require('../settings')
 const { default: makeWASocket, useSingleFileAuthState, DisconnectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
 const pino = require('pino')
 const fs = require('fs')
-const sleep = require('sleep')
 const chalk = require('chalk')
 const cfonts = require('cfonts')
 const axios = require('axios')
@@ -23,11 +22,10 @@ const { state, saveState } = useSingleFileAuthState(`./${global.sessionName}.jso
 const store = makeInMemoryStore({ logger: pino().child({ level: 'fatal', stream: 'store' }) })
 global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.APIs ? global.APIs[name] : name) + path + (query || apikeyqueryname ? '?' + new URLSearchParams(Object.entries({ ...query, ...(apikeyqueryname ? { [apikeyqueryname]: global.APIKeys[name in global.APIs ? global.APIs[name] : name] } : {}) })) : '')
 
-
 //Starting In Console
 async function startIchigo(){
   
-cfonts.say('qwerty',{
+cfonts.say('ICHIGO',{
 font: 'block',
 gradient: ['red','magenta'],
 align: 'center'
@@ -48,16 +46,6 @@ auth: state
 
 store.bind(ichi.ev)
 
-ichi.ws.on('CB:call', async (json) => {
-const callerId = json.content[0].attrs['call-creator']
-if (json.content[0].tag == 'offer') {
-let pa7rick = await ichi.sendMessage(jid, global.owner)
-ichi.sendMessage(jid, { text: `Automatic block system!\nDon't call bot!\nPlease contact the owner to open !`}, { quoted : pa7rick })
-ichi.sendMessage(jid, {text: `*Report Bot:* Someone Called Bot`})
-await sleep(8000)
-await ichi.updateBlockStatus(callerId, "block")
-}
-})
 //Connect To Command
 ichi.ev.on('messages.upsert', async chatUpdate => {
 //console.log(JSON.stringify(chatUpdate, undefined, 2))
@@ -68,7 +56,7 @@ mek.message = (Object.keys(mek.message)[0] === 'ephemeralMessage') ? mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast') return
 if (!ichi.public && !mek.key.fromMe && chatUpdate.type === 'notify') return
 if (mek.key.id.startsWith('BAE5') && mek.key.id.length === 16) return
-m = smsg(ichi, mek, store) 
+m = smsg(ichi, mek, store)
 require("../command/ichi.js")(ichi, m, chatUpdate, store)
 } catch (err) {
 console.log(err)
@@ -85,10 +73,10 @@ for (let num of participants) {
 try {
 ppuser = await ichi.profilePictureUrl(num, 'image') 
 } catch {
-ppuser = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
+ppuser = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
 }
 if (anu.action == 'add') {
-tekswell = `Welcome  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Name*: @${num.split('@')[0]}\n⤔ *Bio*:\n*――――――――――――――*\n\nWelcome 🎊🎊🎉!`
+tekswell = `Welcome @${num.split('@')[0]} To ${metadata.subject} 👋`
 ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: tekswell })
 } else if (anu.action == 'remove') {
 teksbye = `Sayonaraa @${num.split("@")[0]} 👋`
@@ -99,8 +87,6 @@ ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: 
 console.log(err)
 }
 })
-
-
 
 //Connection Active
 ichi.ev.on('connection.update', async (update) => {
@@ -143,7 +129,6 @@ ichi.ev.on('connection.update', async (update) => {
 		startIchigo();
 	}
 })
-
 
 
 //add detek pesan react emoji by FERDIZ AFK
