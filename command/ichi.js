@@ -81,8 +81,8 @@ const mentionUser = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.qu
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 
 
-const sleep = async (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms))
+const sleep = async (m) => {
+  return new Promise(resolve => setTimeout(resolve, m))
 }
 
 const reply = (texto) => {
