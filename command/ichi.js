@@ -192,9 +192,6 @@ case 'менюшка': {
 ╠ ${prefix}removebg
 ╚════════
   `
-  let but = [
-  ]
-  ichi.sendButtonImg(m.chat, menu, global.ownerName, global.thumb, but)
   }
   break
 
