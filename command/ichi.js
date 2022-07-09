@@ -76,7 +76,7 @@ const participants = isGroup ? await groupMetadata.participants : ''
 const groupAdmins = isGroup ? await participants.filter(v => v.admin !== null).map(v => v.id) : ''
 const groupOwner = isGroup ? groupMetadata.owner : ''
 const isBotAdmins = isGroup ? groupAdmins.includes(botNumber) : false
-const isAdmins = isGroup ? groupOwner.includes(sender) || groupAdmins.includes(sender) : false
+const isAdmins = isGroup ? sAdmins.includes(sender) || sAdmins.includes(sender) : false
 const mentionUser = [...new Set([...(mentionedJid || []), ...(quoted ? [quoted.sender] : [])])]
 const isNumber = x => typeof x === 'number' && !isNaN(x)
 
