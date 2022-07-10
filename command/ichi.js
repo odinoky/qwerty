@@ -311,7 +311,7 @@ case 'ссылка': {
   if (!isBotAdmins) return m.reply(mess.botAdmin)
   if (!isAdmins) return m.reply(mess.admin)
   let response = await ichi.groupInviteCode(m.chat)
-  ichi.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nLink Group : ${groupMetadata.subject}`, m, { detectLink: true })
+  ichi.sendText(m.chat, `https://chat.whatsapp.com/${response}\n\nСсылка группы : ${groupMetadata.subject}`, m, { detectLink: true })
   }
   break
 case 'сброссылки': {
