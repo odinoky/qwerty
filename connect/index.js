@@ -3,7 +3,7 @@
    * Subscribe FBOTZ YT
    * Follow https://instagram.com/_nzrlafndi
    * Follow https://github.com/FBOTZ-YT
-*/hj
+*/
 
 require('../settings')
 const { default: makeWASocket, useSingleFileAuthState, connectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
