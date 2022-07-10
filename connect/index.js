@@ -3,7 +3,7 @@
    * Subscribe FBOTZ YT
    * Follow https://instagram.com/_nzrlafndi
    * Follow https://github.com/FBOTZ-YT
-*/
+*/hj
 
 require('../settings')
 const { default: makeWASocket, useSingleFileAuthState, connectReason, AnyMessageContent, generateForwardMessageContent, prepareWAMessageMedia, generateWAMessageFromContent, generateMessageID, downloadContentFromMessage, makeInMemoryStore, jidDecode, proto } = require("@adiwajshing/baileys")
@@ -25,12 +25,12 @@ global.api = (name, path = '/', query = {}, apikeyqueryname) => (name in global.
 //Starting In Console
 async function startIchigo(){
   
-cfonts.say('OLYA3',{
+cfonts.say('OLYA',{
 font: 'block',
 gradient: ['red','magenta'],
 align: 'center'
 })
-cfonts.say('Whatsapp Bot By Fandyyy',{
+cfonts.say('оля не нервничай',{
 font: 'console',
 gradient: ['red','magenta'],
 align: 'center'
