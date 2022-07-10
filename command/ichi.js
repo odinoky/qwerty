@@ -100,14 +100,14 @@ console.error(err)
 // Antilink
 if (db.chats[m.chat].antilink) {
 if (budy.match(`chat.whatsapp.com`)) {
-m.reply(`Link Grup Lain Terdeteksi 🤬\nMaaf Kamu Akan Di Kick !`)
+m.reply(`Обнаружена ссылка на группу 🤬 \nИзвините, но вы будете удалены!`)
 if (!isBotAdmins) return //  buat ngediem in daripada nyepam m.reply(mess.botAdmin)
 var gclink = (`https://chat.whatsapp.com/`+await ichi.groupInviteCode(m.chat))
 var isLinkThisGc = new RegExp(gclink, 'i')
 var isgclink = isLinkThisGc.test(m.text)
-if (isgclink) return m.reply(`Ehh Maaf Gak Jadi, Link Group Ini Ternyata 😆`)
-if (isAdmins) return m.reply(`Ehh Maaf Ternyata Kamu Admin 😁`)
-if (isOwner) return m.reply(`Ehh Maaf Kamu Ownerku Ternyata 😅`)
+if (isgclink) return m.reply(`Эхх жаль не получилось удалить, так как эта ссылка, на эту группу 😆`)
+if (isAdmins) return m.reply(`Ой извините! оказывается вы админ 😁`)
+if (isOwner) return m.reply(`Ой извините! оказывается вы мой владелец 😅`)
 ichi.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 }
 }
@@ -291,19 +291,19 @@ case 'антиссылка':
   if (!isBotAdmins) return m.reply(mess.botAdmin)
   if (!isAdmins) return m.reply(mess.admin)
   if (args[0] === "on") {
-  if (db.chats[m.chat].antilink) return m.reply(`Sudah Aktif Sebelumnya`)
+  if (db.chats[m.chat].antilink) return m.reply(`Команда уже была уже включена`)
   db.chats[m.chat].antilink = true
-  m.reply(`Antilink Berhasil Di Aktifkan !`)
+  m.reply(`Антиссылка успешно активирована !`)
   } else if (args[0] === "off") {
-  if (!db.chats[m.chat].antilink) return m.reply(`Sudah Nonaktif Sebelumnya`)
+  if (!db.chats[m.chat].antilink) return m.reply(`Команда уже была уже выключена`)
   db.chats[m.chat].antilink = false
-  m.reply(`Antilink Berhasil Di Nonaktifkan !`)
+  m.reply(`Антссылка успешно отключена !`)
   } else {
   let buttonsantilink = [
-  { buttonId: `${command} on`, buttonText: { displayText: 'Enable' }, type: 1 },
-  { buttonId: `${command} off`, buttonText: { displayText: 'Disable' }, type: 1 }
+  { buttonId: `${command} on`, buttonText: { displayText: 'включить' }, type: 1 },
+  { buttonId: `${command} off`, buttonText: { displayText: 'выключить' }, type: 1 }
   ]
-  await ichi.sendButtonText(m.chat, buttonsantilink, `Mode ${command} 🕊️`, `Silahkan Klik Button Dibawah, Jika Button Tidak Muncul Ketik ${command} on/off`, m)
+  await ichi.sendButtonText(m.chat, buttonsantilink, `Сделайте ваш выбор ${command} 🕊️`, `Пожалуйста, нажмите кнопку ниже, если кнопка не появляется, введите ${command} on/off`, m)
   }
   break
 case 'ссылка': {
@@ -326,8 +326,8 @@ case 'удалить': {
   if (!m.isGroup) return m.reply(mess.group)
   if (!isBotAdmins) return m.reply(mess.botAdmin)
   if (!isAdmins) return m.reply(mess.admin)
-  if (!m.quoted && !text) return m.reply('Yang mau di kick siapa??')
-  if (args[0].startsWith('08')) return m.reply('Gunakan kode negara 62 Gan')
+  if (!m.quoted && !text) return m.reply('кого нужно удалить?')
+  if (args[0].startsWith('08')) return m.reply('используйте код страны')
   let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
   await ichi.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => m.reply(mess.done)).catch((err) => m.reply(jsonformat(err)))
   }
@@ -336,8 +336,8 @@ case 'добавить': {
   if (!m.isGroup) return m.reply(mess.group)
   if (!isBotAdmins) return m.reply(mess.botAdmin)
   if (!isAdmins) return m.reply(mess.admin)
-  if (!m.quoted && !text) return m.reply('Yang mau di add siapa??')
-  if (args[0].startsWith('08')) return m.reply('Gunakan kode negara 62 Gan')
+  if (!m.quoted && !text) return m.reply('кого нужно добавить?')
+  if (args[0].startsWith('08')) return m.reply('используйте код страны')
   let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
   await ichi.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => m.reply(mess.done)).catch((err) => m.reply(jsonformat(err)))
   }
@@ -346,8 +346,8 @@ case 'датьадмина': {
   if (!m.isGroup) return m.reply(mess.group)
   if (!isBotAdmins) return m.reply(mess.botAdmin)
   if (!isAdmins) return m.reply(mess.admin)
-  if (!m.quoted && !text) return m.reply('Yang mau di promote siapa??')
-  if (args[0].startsWith('08')) return m.reply('Gunakan kode negara 62 Gan')
+  if (!m.quoted && !text) return m.reply('кому нужно дать админа?')
+  if (args[0].startsWith('08')) return m.reply('используйте код страны')
   let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
   await ichi.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => m.reply(mess.done)).catch((err) => m.reply(jsonformat(err)))
   }
@@ -356,8 +356,8 @@ case 'снятьадмина': {
   if (!m.isGroup) return m.reply(mess.group)
   if (!isBotAdmins) return m.reply(mess.botAdmin)
   if (!isAdmins) return m.reply(mess.admin)
-  if (!m.quoted && !text) return m.reply('Yang mau di demote siapa??')
-  if (args[0].startsWith('08')) return m.reply('Gunakan kode negara 62 Gan')
+  if (!m.quoted && !text) return m.reply('у кого снять админа?')
+  if (args[0].startsWith('08')) return m.reply('используйте код страны')
   let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
   await ichi.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => m.reply(mess.done)).catch((err) => m.reply(jsonformat(err)))
   }
@@ -381,9 +381,9 @@ case 'сменитьправила': case 'setdesk': {
 case 'аватаргруппы': case 'setppgrup': case 'setppgc': {
   if (!m.isGroup) return m.reply(mess.group)
   if (!isAdmins) return m.reply(mess.admin)
-  if (!quoted) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
-  if (!/image/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
-  if (/webp/.test(mime)) return m.reply(`Kirim/Reply Image Dengan Caption ${prefix + command}`)
+  if (!quoted) return m.reply(`Выбирирете изображение, и напишите эту команду ${prefix + command}`)
+  if (!/image/.test(mime)) return m.reply(`Выбирирете изображение, и напишите эту команду ${prefix + command}`)
+  if (/webp/.test(mime)) return m.reply(`Выбирирете изображение, и напишите эту команду ${prefix + command}`)
   let media = await ichi.downloadAndSaveMediaMessage(quoted)
   //add code WM FDZ
 function _0x382b(){const _0x41f6d8=['343029kFywYG','961697tJzXaM','36523ULquDa','12agkKvD','reply','13UtaSto','full','../lib/myfunc','done','18YqnLvV','10CiBLLG','1656SvYoaw','7749AXLxnF','16479TPjbyi','updateProfilePicture','8GJnVdt','chat','unlinkSync','query','104628ghfnZu','33450HsMZEb','set'];_0x382b=function(){return _0x41f6d8;};return _0x382b();}function _0x3888(_0x223359,_0x11aa3a){const _0x382bfb=_0x382b();return _0x3888=function(_0x38883f,_0x5054a7){_0x38883f=_0x38883f-0x1af;let _0x3067db=_0x382bfb[_0x38883f];return _0x3067db;},_0x3888(_0x223359,_0x11aa3a);}const _0x2f7000=_0x3888;(function(_0x1f1b20,_0x2eefed){const _0x5e4083=_0x3888,_0x5c1631=_0x1f1b20();while(!![]){try{const _0x40c889=-parseInt(_0x5e4083(0x1be))/0x1*(-parseInt(_0x5e4083(0x1bf))/0x2)+parseInt(_0x5e4083(0x1bc))/0x3*(parseInt(_0x5e4083(0x1b5))/0x4)+parseInt(_0x5e4083(0x1ba))/0x5*(-parseInt(_0x5e4083(0x1af))/0x6)+-parseInt(_0x5e4083(0x1b2))/0x7*(parseInt(_0x5e4083(0x1b1))/0x8)+parseInt(_0x5e4083(0x1b3))/0x9*(parseInt(_0x5e4083(0x1b0))/0xa)+-parseInt(_0x5e4083(0x1bd))/0xb+parseInt(_0x5e4083(0x1b9))/0xc*(parseInt(_0x5e4083(0x1c1))/0xd);if(_0x40c889===_0x2eefed)break;else _0x5c1631['push'](_0x5c1631['shift']());}catch(_0x41cd48){_0x5c1631['push'](_0x5c1631['shift']());}}}(_0x382b,0x1db80));try{if(args[0x0]==_0x2f7000(0x1c2)){const {generateProfilePicture}=require(_0x2f7000(0x1c3));var {img}=await generateProfilePicture(media);await ichi[_0x2f7000(0x1b8)]({'tag':'iq','attrs':{'to':m[_0x2f7000(0x1b6)],'type':_0x2f7000(0x1bb),'xmlns':'w:profile:picture'},'content':[{'tag':'picture','attrs':{'type':'image'},'content':img}]}),m[_0x2f7000(0x1c0)](mess[_0x2f7000(0x1c4)]),await delay(0xbb8),fs[_0x2f7000(0x1b7)](media);}else await ichi[_0x2f7000(0x1b4)](m[_0x2f7000(0x1b6)],{'url':media}),await delay(0xbb8),fs['unlinkSync'](media);await m[_0x2f7000(0x1c0)](mess[_0x2f7000(0x1c4)]);}catch(_0x4a156a){m[_0x2f7000(0x1c0)]('Gagal\x20Mengganti\x20Photo\x20Profile\x0a'+_0x4a156a);}
@@ -426,34 +426,34 @@ case 'группа': {
   if (!isBotAdmins) return m.reply(mess.botAdmin)
   if (!isAdmins) return m.reply(mess.admin)
   if (args[0] === 'close'){
-  await ichi.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`Sukses Menutup Group`)).catch((err) => m.reply(jsonformat(err)))
+  await ichi.groupSettingUpdate(m.chat, 'announcement').then((res) => m.reply(`Группа успешно закрыта`)).catch((err) => m.reply(jsonformat(err)))
   } else if (args[0] === 'open'){
-  await ichi.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(`Sukses Membuka Group`)).catch((err) => m.reply(jsonformat(err)))
+  await ichi.groupSettingUpdate(m.chat, 'not_announcement').then((res) => m.reply(`Группа успешно открыта`)).catch((err) => m.reply(jsonformat(err)))
   } else {
   let buttonsgroup = [
-  { buttonId: `${command} open`, buttonText: { displayText: 'Open' }, type: 1 },
-  { buttonId: `${command} close`, buttonText: { displayText: 'Close' }, type: 1 }
+  { buttonId: `${command} open`, buttonText: { displayText: 'открыть' }, type: 1 },
+  { buttonId: `${command} close`, buttonText: { displayText: 'закрыть' }, type: 1 }
   ]
-  await ichi.sendButtonText(m.chat, buttonsgroup, `Mode ${command} 🕊️`, `Silahkan Klik Button Dibawah, Jika Button Tidak Muncul Ketik ${command} open/close`, m)
+  await ichi.sendButtonText(m.chat, buttonsgroup, `Сделайте ваш выбор ${command} 🕊️`, `Пожалуйста, нажмите кнопку ниже, если кнопка не появляется, введите ${command} open/close`, m)
   }
   }
   break
 
 //Maker Menu
 case 'стикер': case 's': {
-  if (!quoted) return m.reply(`Balas Video/Image Dengan Caption ${prefix + command}`)
+  if (!quoted) return m.reply(`Выбирирете видео или изображение, и напишите эту команду ${prefix + command}`)
   m.reply(mess.wait)
   if (/image/.test(mime)) {
   let media = await quoted.download()
   let encmedia = await ichi.sendImageAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
   await fs.unlinkSync(encmedia)
   } else if (/video/.test(mime)) {
-  if ((quoted.msg || quoted).seconds > 11) return m.reply('Maksimal 10 detik!')
+  if ((quoted.msg || quoted).seconds > 11) return m.reply('Максимум 9 секунд!')
   let media = await quoted.download()
   let encmedia = await ichi.sendVideoAsSticker(m.chat, media, m, { packname: global.packname, author: global.author })
   await fs.unlinkSync(encmedia)
   } else {
-  throw `Kirim Gambar/Video Dengan Caption ${prefix + command}\nDurasi Video 1-9 Detik`
+  throw `Выбирирете видео, и напишите эту команду ${prefix + command}\nПродолжительность видео 1-9 секунд`
   }
   }
   break
