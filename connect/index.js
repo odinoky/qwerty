@@ -76,10 +76,10 @@ ppuser = await ichi.profilePictureUrl(num, 'image')
 ppuser = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
 }
 if (anu.action == 'add') {
-tekswell = `Welcome  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Name*: @${num.split('@')[0]}\n⤔ *Bio*:\n*――――――――――――――*\n\nWelcome 🎊🎊🎉!`
+tekswell = `Добро пожаловать в нашу группу!  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Name*: @${num.split('@')[0]}\n*――――――――――――――*\n\nНадеюсь, вам понравится в нашей гркппе!!! 🎊🎊🎉!`
 ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: tekswell })
 } else if (anu.action == 'remove') {
-teksbye = `Sayonaraa @${num.split("@")[0]} 👋`
+teksbye = `Досвидание участник\n Мы будем скучать!\n Но это не точно @${num.split("@")[0]} 👋`
 ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: teksbye })
 }
 }
