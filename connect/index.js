@@ -91,7 +91,7 @@ console.log(err)
 //Connection Active
 ichi.ev.on('connection.update', async (update) => {
 	const {
-		connectio,
+		connection,
 		lastDisconnect
 	} = update
 	try {
