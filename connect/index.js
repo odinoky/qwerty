@@ -116,10 +116,10 @@ ichi.ev.on('connection.update', async (update) => {
 				startIchigo();
 			} else ichi.end(`Unknown connectReason: ${reason}|${connection}`)
 		}
-		if (update.connection == "connecting" || update.receivedPendingNotifications == "false") {
+		if (update.connection === "connecting" || update.receivedPendingNotifications === "false") {
 			lolcatjs.fromString(`[Sedang mengkoneksikan]`)
 		}
-		if (update.connection == "open" || update.receivedPendingNotifications == "true") {
+		if (update.connection === "open" || update.receivedPendingNotifications === "true") {
 			lolcatjs.fromString(`[Connecting to] WhatsApp web`)
 			lolcatjs.fromString(`[Connected] ` + JSON.stringify(ichi.user, null, 2))
 		}
