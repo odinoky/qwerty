@@ -92,7 +92,7 @@ console.log(err)
 ichi.ev.on('connection.update', async (update) => {
 	const {
 		connectio,
-		lastDisconnectn
+		lastDisconnect
 	} = update
 	try {
 		if (connection === 'close') {
