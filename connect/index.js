@@ -76,7 +76,7 @@ ppuser = await ichi.profilePictureUrl(num, 'image')
 ppuser = 'https://i.ibb.co/F3rhjBN/Add-Text-05-22-10-21-04.jpg'
 }
 if (anu.action == 'add') {
-tekswell = `Добро пожаловать в нашу группу!\n Ознакомтесь пожайлуста с правилами группы!\n  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Имя участника(цы)*: @${num.split('@')[0]}\n*――――――――――――――*\n\nНадеюсь, вам понравится в нашей группе!!! 🎊🎊🎉!`
+tekswell = `Добро пожаловать в нашу группу!\n Ознакомьтесь пожалуйста с правилами нашей группы.!\n  ${metadata.subject}]*\n\n*――――――――――――――*\n⤔ *Имя участника(цы)*: @${num.split('@')[0]}\n*――――――――――――――*\n\nНадеемся Вам у нас понравится 🤝!!! 🎊🎊🎉!`
 ichi.sendMessage(anu.id, { image: { url: ppuser }, contextInfo: { mentionedJid: [num] }, caption: tekswell })
 } else if (anu.action == 'remove') {
 teksbye = `До свидание участник\n Были рады знакомству! @${num.split("@")[0]} 👋`
@@ -96,22 +96,22 @@ ichi.ev.on('connection.update', async (update) => {
 	try {
 		if (connection === 'close') {
 			let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-			if (reason === connectReason.badSession) {
+			if (reason === DisconnectReason.badSession) {
 				console.log(`Bad Session File, Please Delete Session and Scan Again`);
-			} else if (reason === connectReason.connectionClosed) {
+			} else if (reason === DisconnectReason.connectionClosed) {
 				console.log("Connection closed, reconnecting....");
 				startIchigo();
-			} else if (reason === connectReason.connectionLost) {
+			} else if (reason === DisconnectReason.connectionLost) {
 				console.log("Connection Lost from Server, reconnecting...");
 				startIchigo();
-			} else if (reason === connectReason.connectionReplaced) {
+			} else if (reason === DisconnectReason.connectionReplaced) {
 				console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
-			} else if (reason === connectReason.loggedOut) {
+			} else if (reason === DisconnectReason.loggedOut) {
 				console.log(`Device Logged Out, Please Scan Again And Run.`);
-			} else if (reason === connectReason.restartRequired) {
+			} else if (reason === DisconnectReason.restartRequired) {
 				console.log("Restart Required, Restarting...");
 				startIchigo();
-			} else if (reason === connectReason.timedOut) {
+			} else if (reason === DisconnectReason.timedOut) {
 				console.log("Connection TimedOut, Reconnecting...");
 				startIchigo();
 			} else ichi.end(`Unknown connectReason: ${reason}|${connection}`)
