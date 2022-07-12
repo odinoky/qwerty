@@ -96,30 +96,30 @@ ichi.ev.on('connection.update', async (update) => {
 	try {
 		if (connection === 'close') {
 			let reason = new Boom(lastDisconnect?.error)?.output.statusCode
-			if (reason === DisconnectReason.badSession) {
+			if (reason === connectReason.badSession) {
 				console.log(`Bad Session File, Please Delete Session and Scan Again`);
-			} else if (reason === DisconnectReason.connectionClosed) {
+			} else if (reason === connectReason.connectionClosed) {
 				console.log("Connection closed, reconnecting....");
 				startIchigo();
-			} else if (reason === DisconnectReason.connectionLost) {
+			} else if (reason === connectReason.connectionLost) {
 				console.log("Connection Lost from Server, reconnecting...");
 				startIchigo();
-			} else if (reason === DisconnectReason.connectionReplaced) {
+			} else if (reason === connectReason.connectionReplaced) {
 				console.log("Connection Replaced, Another New Session Opened, Please Close Current Session First");
-			} else if (reason === DisconnectReason.loggedOut) {
+			} else if (reason === connectReason.loggedOut) {
 				console.log(`Device Logged Out, Please Scan Again And Run.`);
-			} else if (reason === DisconnectReason.restartRequired) {
+			} else if (reason === connectReason.restartRequired) {
 				console.log("Restart Required, Restarting...");
 				startIchigo();
-			} else if (reason === DisconnectReason.timedOut) {
+			} else if (reason === connectReason.timedOut) {
 				console.log("Connection TimedOut, Reconnecting...");
 				startIchigo();
 			} else ichi.end(`Unknown connectReason: ${reason}|${connection}`)
 		}
-		if (update.connection === "connecting" || update.receivedPendingNotifications === "false") {
+		if (update.connection == "connecting" || update.receivedPendingNotifications == "false") {
 			lolcatjs.fromString(`[Sedang mengkoneksikan]`)
 		}
-		if (update.connection === "open" || update.receivedPendingNotifications === "true") {
+		if (update.connection == "open" || update.receivedPendingNotifications == "true") {
 			lolcatjs.fromString(`[Connecting to] WhatsApp web`)
 			lolcatjs.fromString(`[Connected] ` + JSON.stringify(ichi.user, null, 2))
 		}
