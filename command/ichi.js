@@ -113,22 +113,6 @@ ichi.groupParticipantsUpdate(m.chat, [m.sender], 'remove')
 }
 
 
-		if (m.isGroup && m.mtype == 'viewOnceMessage') {
-			let teks = `「 *Anti ViewOnce Message* 」
-    
-    🤠 *Name* : ${pushname}
-    👾 *User* : @${m.sender.split("@")[0]}
-    ⏰ *Clock* : ${moment.tz('Asia/Jakarta').format('HH:mm:ss')} WIB
-    
-    💫 *MessageType* : ${m.mtype}`
-     reply(teks)
-			await sleep(800000)
-			m.copyNForward(m.chat, true, {
-				readViewOnce: true
-			}, {
-				quoted: mek
-			}).catch(_ => m.reply('Mungkin dah pernah dibuka bot'))
-		}
 
 //Update Database
 setInterval(() => {
