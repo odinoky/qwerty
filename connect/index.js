@@ -88,7 +88,6 @@ console.log(err)
 }
 })
 
-//Connection Active
 ichi.ev.on('connection.update', async (update) => {
 	const {
 		connection
